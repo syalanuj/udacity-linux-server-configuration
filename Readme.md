@@ -25,22 +25,25 @@ Working website deployed at http://35.166.113.254
 1. Generate public and private keys using `ssh-keygen` and save the key as "authorized_keys"
 2. Move the private key in ~/.ssh
 3. On VM copy the public key to
+
 ```
 $ su - grader
 $ mkdir .ssh
 $ sudo nano .ssh/authorized_keys
 ```
-copy public key to this file
 
-4. Give following permissions
+4. Copy public key to this file
+
+5. Give following permissions
 ```
 $ chmod 700 .ssh
 $ chmod 644 .ssh/authorized_keys
 ```
 
-5. Restart ssh service `ssh service restart`
+ Restart ssh service `ssh service restart`
 
-6. Login using grader `ssh -i [privateKeyFilename] grader@35.166.113.254`. Use the private key attached with "Passw0rd" as password
+Login using grader `ssh -i [privateKeyFilename] grader@35.166.113.254`. Use the private key attached with "Passw0rd" as password
+
 
 ##Update all currently installed packages
 `sudo apt-get update`
