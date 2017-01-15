@@ -74,7 +74,7 @@ Reference taken from https://www.digitalocean.com/community/tutorials/how-to-ser
 10. Install pip `sudo apt-get install python-pip`
 11. Install psycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
 12. Create database schema `sudo python database_setup.py`
-13. Create catalog.conf `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
+13. Create catalog.conf `sudo nano /etc/apache2/sites-available/catalog.conf`
 14. Add
 
 ```
@@ -110,4 +110,5 @@ sys.path.insert(0,"/var/www/FlaskApp/")
 from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
 ```
+
 18. Restart apache service `sudo service apache2 restart`
