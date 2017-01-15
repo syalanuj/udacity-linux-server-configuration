@@ -42,9 +42,25 @@ Use `sudo dpkg-reconfigure tzdata` to set timezone to utc
 
 ##Install and configure Apache to serve a Python mod_wsgi application
 Reference taken from https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-14-04
+
 1. Install Apache2 `sudo apt-get install apache2`
 2. Install mod_wsgi `sudo apt-get install python-setuptools libapache2-mod-wsgi`
 3. Restart service `sudo service apache2 restart`
 
+##Install and configure PostgreSQL:
+####Do not allow remote connections
+####Create a new user named catalog that has limited permissions to your catalog application database
 
-  
+1. `sudo apt-get install postgresql`
+2. Check for remote connections `sudo nano /etc/postgresql/9.3/main/pg_hba.conf`
+3. `sudo su - postgres` Login as "postgres"
+4. Type `psql` 
+5. Create new database named "catalog": `CREATE DATABASE catalog;`
+6. Create new user "catalog": `CREATE USER catalog;`
+7. Set password for user "catalog": `ALTER ROLE catalog WITH PASSWORD 'password';`
+8. Give user "catalog" permission to "catalog" application database: 
+9. quit from postgres
+
+##Setup Item catalog app
+
+
