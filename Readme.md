@@ -62,5 +62,52 @@ Reference taken from https://www.digitalocean.com/community/tutorials/how-to-ser
 9. quit from postgres
 
 ##Setup Item catalog app
+1. Install git `sudo apt-get install git`
+2. Make directory for application `cd /var/www/` and `sudo mkdir ItemCatalog`
+3. `cd ItemCatalog`
+4. Clone application `git clone https://github.com/syalanuj/ItemCatalog.git`
+5. `cd ItemCatalog/vagrant`
+6. Move "catalog" (application folder to "/var/www") : `sudo mv catalog ../../catalog`
+7. go to application folder `cd catalog`
+8. Rename "project.py" to "__init__.py" `sudo mv project.py __init__.py`
+9. Edit "__init__.py" and "database_setup.py" replace 'sqlite:///itemcatalog.db' with 'postgresql://catalog:password@localhost/catalog' in both the files
+10. Install pip `sudo apt-get install python-pip`
+11. Install psycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
+12. Create database schema `sudo python database_setup.py`
+13. Create catalog.conf `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
+14. Add
 
+```
+<VirtualHost *:80>
+    ServerName 35.166.113.254
+    ServerAdmin syal.anuj@gmail.com
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/catalog/static
+    <Directory /var/www/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 
+15. Enable virtual host `sudo a2ensite FlaskApp`
+16. Create .wsgi file `sudo nano /var/www/catalog/catalog.wsgi`
+17. Add following
+```
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp/")
+
+from FlaskApp import app as application
+application.secret_key = 'Add your secret key'
+```
+18. Restart apache service `sudo service apache2 restart`
