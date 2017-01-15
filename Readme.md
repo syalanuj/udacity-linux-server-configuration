@@ -2,6 +2,7 @@
 Final project for Udacity Fullstack Developer nanodegree
 Working website deployed at http://35.166.113.254
 
+'grader' password 'Passw0rd'
 
 ##Access the server using ssh
 1.Download Private Key below
@@ -19,6 +20,27 @@ Working website deployed at http://35.166.113.254
 2. `sudo nano /etc/sudoers.d/grader`
 3. Add following lines `grader ALL=(ALL:ALL) NOPASSWD:ALL`
 4. Save and exit
+
+### ssh login using user 'grader'
+1. Generate public and private keys using `ssh-keygen` and save the key as "authorized_keys"
+2. Move the private key in ~/.ssh
+3. On VM copy the public key to
+```
+$ su - grader
+$ mkdir .ssh
+$ sudo nano .ssh/authorized_keys
+```
+copy public key to this file
+
+4. Give following permissions
+```
+$ chmod 700 .ssh
+$ chmod 644 .ssh/authorized_keys
+```
+
+5. Restart ssh service `ssh service restart`
+
+6. Login using grader `ssh -i [privateKeyFilename] grader@35.166.113.254`. Use the private key attached with "Passw0rd" as password
 
 ##Update all currently installed packages
 `sudo apt-get update`
