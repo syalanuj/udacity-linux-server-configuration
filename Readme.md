@@ -18,7 +18,7 @@ Working website deployed at http://35.166.113.254
 ##Create  new user 'grader'
 1. `sudo adduser grader`
 2. `sudo nano /etc/sudoers.d/grader`
-3. Add following lines `grader ALL=(ALL:ALL) NOPASSWD:ALL`
+3. Add following lines `grader ALL=(ALL:ALL) ALL`
 4. Save and exit
 
 ### ssh login using user 'grader'
@@ -134,3 +134,8 @@ application.secret_key = 'Add your secret key'
 ```
 
 18. Restart apache service `sudo service apache2 restart`
+
+##Remove Remote login using root 
+1. `sudo nano /etc/ssh/sshd_config`
+2. change PermitRootLogin without-password to PermitRootLogin no.
+3. save and `sudo service ssh restart`
